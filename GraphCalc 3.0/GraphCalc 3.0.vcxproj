@@ -72,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>D:\VSProjects\SFML-2.3.2\include;D:\VSProjects\xlib\xlib\xlib;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\VSProjects\SFML-2.3.2\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\VSProjects\xlib\xlib\Debug;D:\VSProjects\SFML-2.3.2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -94,12 +94,13 @@
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\VSProjects\SFML-2.3.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\VSProjects\xlib\xlib\Debug;D:\VSProjects\SFML-2.3.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;xlib.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -153,14 +154,63 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CoordinateConverter.h" />
+    <ClInclude Include="AppComponent.h" />
+    <ClInclude Include="AppConstants.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Axis.h" />
+    <ClInclude Include="ConstExpr.h" />
+    <ClInclude Include="ExprMaker.h" />
+    <ClInclude Include="ExprMap.h" />
+    <ClInclude Include="InterfixOperator.h" />
+    <ClInclude Include="Operator.h" />
+    <ClInclude Include="OperatorExpr.h" />
+    <ClInclude Include="CommandAnalizer.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="DrawingHandler.h" />
+    <ClInclude Include="DrawTask.h" />
+    <ClInclude Include="FunctionExpr.h" />
+    <ClInclude Include="constants.h" />
+    <ClInclude Include="DragHandler.h" />
+    <ClInclude Include="ExprParser.h" />
+    <ClInclude Include="FuncMap.h" />
+    <ClInclude Include="Functions.h" />
+    <ClInclude Include="PostfixOperator.h" />
+    <ClInclude Include="PrefixOperator.h" />
+    <ClInclude Include="ServiceHandler.h" />
     <ClInclude Include="Plot.h" />
+    <ClInclude Include="PlotHandler.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="View.h" />
+    <ClInclude Include="XAxis.h" />
+    <ClInclude Include="VariableExpr.h" />
+    <ClInclude Include="YAxis.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CoordinateConverter.cpp" />
+    <ClCompile Include="AppComponent.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Axis.cpp" />
+    <ClCompile Include="ConstExpr.cpp" />
+    <ClCompile Include="ExprMaker.cpp" />
+    <ClCompile Include="InterfixOperator.cpp" />
+    <ClCompile Include="Operator.cpp" />
+    <ClCompile Include="OperatorExpr.cpp" />
+    <ClCompile Include="CommandAnalizer.cpp" />
+    <ClCompile Include="DrawingHandler.cpp" />
+    <ClCompile Include="FunctionExpr.cpp" />
+    <ClCompile Include="DragHandler.cpp" />
+    <ClCompile Include="ExprParser.cpp" />
+    <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Plot.cpp" />
+    <ClCompile Include="PlotHandler.cpp" />
+    <ClCompile Include="PostfixOperator.cpp" />
+    <ClCompile Include="PrefixOperator.cpp" />
+    <ClCompile Include="ServiceHandler.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="View.cpp" />
+    <ClCompile Include="XAxis.cpp" />
+    <ClCompile Include="VariableExpr.cpp" />
+    <ClCompile Include="YAxis.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,48 +2,56 @@
 #define _PLOT_H_
 
 #include "xvector.h"
-#include "CoordinateConverter.h"
-#include "mathfn.h"
+#include "View.h"
 #include "wrap.h"
+#include "DrawTask.h"
 
-class Plot:
-	public sf::Drawable
+
+class Plot
 {
-	using Func = x::math::expr<basic_t>;
+	friend class PlotHandler;
 
 	x::vector<Point> funcValues_;
 	x::vector<sf::Vertex> plotPoints_;
 	x::range<basic_t> funcRange_;
-	Func* func_;
+	Expr* func_;
+	View const& targetView_;
 
 	sf::Vertex calcPlotPoint_(basic_t xVal);
 
 public:
 	struct Parameters
 	{
-		sf::Color color;
-
 		static const Parameters DEFAULT;
 
-		Parameters(sf::Color const& color);
+		sf::Color plotColor;
+		sf::Color backgroundColor;
+
+		Parameters(
+			sf::Color const& plotColor,
+			sf::Color const& backgroundColor = DEFAULT.backgroundColor);
 	};
 
-	ViewConverter targetView;
 	Parameters parameters;
 
-	Plot();
+	Plot(
+		View const& targetView);
 
 	Plot(
-		x::wrap::ptr<Func> func,
-		x::range<basic_t> const & funcRange,
-		ViewConverter const& targetView,
-		Parameters const& parameters = Parameters::DEFAULT);
+		x::wrap::ptr<Expr>			func,
+		x::range<basic_t> const&	funcRange,
+		View const&					targetView,
+		Parameters const&			parameters = Parameters::DEFAULT);
 
-	virtual void draw(
+	/*virtual void draw(
 		sf::RenderTarget&	target,
-		sf::RenderStates	renderStates = sf::RenderStates::Default) const override;
-	
+		sf::RenderStates	renderStates = sf::RenderStates::Default) const override;*/
+	void display() const;
+	void fitTarget();
 	void refresh();
+	//void setViewRange(Point const& viewMin, Point const& viewMax);
+
+	~Plot();
 };
 
 #endif //_PLOT_H_

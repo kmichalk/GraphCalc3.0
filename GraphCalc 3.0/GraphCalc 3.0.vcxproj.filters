@@ -16,22 +16,121 @@
     <Filter Include="Plot">
       <UniqueIdentifier>{fc205c25-7a69-482d-b5af-dad009bd1d61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CoordinateConverter">
-      <UniqueIdentifier>{4a0452eb-f1c7-4403-99f2-3f05ecce285c}</UniqueIdentifier>
+    <Filter Include="View">
+      <UniqueIdentifier>{da27ff38-7958-4f62-9471-e5e2b662e538}</UniqueIdentifier>
     </Filter>
-    <Filter Include="global">
+    <Filter Include="Application">
+      <UniqueIdentifier>{3e14ebf0-ef9f-4b1f-b5d6-7144031a6fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Service">
+      <UniqueIdentifier>{41d0b6fc-4b4b-435a-aa2c-cd12e22cc9f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser">
+      <UniqueIdentifier>{8349d9b1-bfc7-4438-a0ab-97df12a290d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Draw">
+      <UniqueIdentifier>{48a1fb3f-3822-4679-b2c5-cc992849bb33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\Operator">
+      <UniqueIdentifier>{68ac35ae-ad30-4d1a-ba49-e5abaefdeb11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
       <UniqueIdentifier>{8b0c458f-dfa4-442f-b54b-168374bd3a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global\Functions">
+      <UniqueIdentifier>{ddf1f383-c662-4e4c-897d-9f7b981620a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plot.h">
       <Filter>Plot</Filter>
     </ClInclude>
-    <ClInclude Include="CoordinateConverter.h">
-      <Filter>CoordinateConverter</Filter>
-    </ClInclude>
     <ClInclude Include="types.h">
-      <Filter>global</Filter>
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="PlotHandler.h">
+      <Filter>Plot</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceHandler.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="DragHandler.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="ExprParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionExpr.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingHandler.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawTask.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="AppComponent.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="XAxis.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="AppConstants.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="YAxis.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandAnalizer.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorExpr.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableExpr.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstExpr.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Operator.h">
+      <Filter>Parser\Operator</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefixOperator.h">
+      <Filter>Parser\Operator</Filter>
+    </ClInclude>
+    <ClInclude Include="PostfixOperator.h">
+      <Filter>Parser\Operator</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfixOperator.h">
+      <Filter>Parser\Operator</Filter>
+    </ClInclude>
+    <ClInclude Include="ExprMaker.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Global\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="FuncMap.h">
+      <Filter>Global\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ExprMap.h">
+      <Filter>Global\Functions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -41,8 +140,74 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoordinateConverter.cpp">
-      <Filter>CoordinateConverter</Filter>
+    <ClCompile Include="PlotHandler.cpp">
+      <Filter>Plot</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceHandler.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="DragHandler.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="ExprParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionExpr.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingHandler.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="AppComponent.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Axis.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="XAxis.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="YAxis.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandAnalizer.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="OperatorExpr.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableExpr.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstExpr.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Operator.cpp">
+      <Filter>Parser\Operator</Filter>
+    </ClCompile>
+    <ClCompile Include="PrefixOperator.cpp">
+      <Filter>Parser\Operator</Filter>
+    </ClCompile>
+    <ClCompile Include="PostfixOperator.cpp">
+      <Filter>Parser\Operator</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfixOperator.cpp">
+      <Filter>Parser\Operator</Filter>
+    </ClCompile>
+    <ClCompile Include="ExprMaker.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Global\Functions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
