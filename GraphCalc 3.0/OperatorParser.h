@@ -5,19 +5,24 @@
 #include "xvector.h"
 
 
-class OperatorExpr:
+class Operator;
+
+class OperatorParser:
 	public ExprParser
 {
-	x::vector<char> operatorPriority_;
+	x::vector<Operator*> operatorPriority_;
 
 public:
-	OperatorExpr(
+	OperatorParser(
+		CommandAnalizer const& parentAnalizer);
+
+	OperatorParser(
 		CommandAnalizer const& parentAnalizer, 
-		std::initializer_list<char> operators);
+		std::initializer_list<Operator*> operators);
 
 	virtual Expr* match(x::string const& text) const override;
-	void addOperator(char delim);
-	void addOperator(char delim, size_t priority);
+	void addOperator(Operator* op);
+	void addOperator(Operator* op, size_t priority);
 	virtual bool basicValidate(x::string const& text) const override;
 };
 

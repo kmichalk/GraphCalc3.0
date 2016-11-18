@@ -10,12 +10,12 @@ class InterfixOperator:
 protected:
 	static constexpr size_t ARGNUM_ = 2;
 
-	x::result<size_t> findOperator_(x::string const & text, char op) const;
+	x::result<size_t> findOperator_(x::string const & text) const;
 
 public:
 	InterfixOperator(
-		OperatorExpr const& parentParser,
-		x::string const& sign);
+		OperatorParser const& parentParser,
+		char identifier);
 
 	virtual Expr* match(x::string const& text) const override;
 	virtual size_t argnum() const override;

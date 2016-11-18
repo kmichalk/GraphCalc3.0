@@ -2,10 +2,13 @@
 #include "Functions.h"
 #include "Grid.h"
 #include "XAxis.h"
-#include "OperatorExpr.h"
-#include "FunctionExpr.h"
-#include "VariableExpr.h"
-#include "ConstExpr.h"
+#include "OperatorParser.h"
+#include "FunctionParser.h"
+#include "VariableParser.h"
+#include "ConstParser.h"
+#include "PostfixOperator.h"
+#include "PrefixOperator.h"
+#include "InterfixOperator.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -46,18 +49,37 @@ void Application::initKeyEvents_()
 	});
 
 	eventHandler_.add(new KeyPressEvent{
-		WKey::T,
+		WKey::LAlt,
 		true,
 		x::Fn<Application, void()>{ this, &Application::createTestPlots_ }
+	});
+
+	eventHandler_.add(new KeyCombinationEvent{
+		{WKey::LCtrl, WKey::Del},
+		true,
+		x::Fn<PlotHandler, void()>{ &plotHandler_, &PlotHandler::clear }
 	});
 }
 
 void Application::initCommandAnalizer_()
 {
-	commandAnalizer_.addParser(new OperatorExpr{commandAnalizer_,{'+','-','*','/','^'}});
-	commandAnalizer_.addParser(new FunctionExpr{commandAnalizer_});
-	commandAnalizer_.addParser(new VariableExpr{commandAnalizer_,"x"});
-	commandAnalizer_.addParser(new ConstExpr{commandAnalizer_});
+	auto opParser = new OperatorParser{commandAnalizer_};
+	opParser->addOperator(new InterfixOperator{*opParser, '<'});
+	opParser->addOperator(new InterfixOperator{*opParser, '>'});
+	opParser->addOperator(new InterfixOperator{*opParser, '='});
+	opParser->addOperator(new InterfixOperator{*opParser, '~'});
+
+	opParser->addOperator(new InterfixOperator{*opParser, '+'});
+	opParser->addOperator(new InterfixOperator{*opParser, '-'});
+	opParser->addOperator(new PrefixOperator{*opParser, '-'});
+	opParser->addOperator(new InterfixOperator{*opParser, '*'});
+	opParser->addOperator(new InterfixOperator{*opParser, '/'});
+	opParser->addOperator(new InterfixOperator{*opParser, '%'});
+	opParser->addOperator(new InterfixOperator{*opParser, '^'});
+	commandAnalizer_.addParser(opParser);
+	commandAnalizer_.addParser(new FunctionParser{commandAnalizer_});
+	commandAnalizer_.addParser(new VariableParser{commandAnalizer_,"x"});
+	commandAnalizer_.addParser(new ConstParser{commandAnalizer_});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -80,10 +102,10 @@ void Application::createTestPlots_()
 		plotHandler_.createPlot(commandAnalizer_.process(input));
 	}
 	catch (x::error<PlotHandler> e) {
-		std::cout << e.message;
+		std::cout << e.message << std::endl;
 	}
 	catch (x::error<CommandAnalizer> e) {
-		std::cout << e.message;
+		std::cout << e.message<<std::endl;
 	}
 	//plotHandler_.createPlot(new Func<1>{::sin}, {sf::Color{100,200,100}});
 	/*plotHandler_.createPlot(Func<2>{Functions::add,

@@ -33,7 +33,7 @@ private:
 	//DragHandler dragHandler_;
 	PlotHandler plotHandler_;
 	CommandAnalizer commandAnalizer_;
-	EventHandler<Event> eventHandler_;
+	EventHandler<x::ExceptionHandling::X_ERRORS> eventHandler_;
 	DrawingHandler drawingHandler_;
 	sf::Event windowEvent_;
 

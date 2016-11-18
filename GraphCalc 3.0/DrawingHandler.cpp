@@ -63,6 +63,11 @@ void DrawingHandler::process()
 	TimedProcess::process();
 }
 
+//  ,   ,
+//  (*,*)
+// ((   ))
+//   " "
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void DrawingHandler::task()

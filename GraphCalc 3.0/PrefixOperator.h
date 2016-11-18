@@ -12,8 +12,8 @@ protected:
 
 public:
 	PrefixOperator(
-		OperatorExpr const& parentParser,
-		x::string const& sign);
+		OperatorParser const& parentParser,
+		char identifier);
 
 	virtual Expr* match(x::string const& text) const override;
 	virtual size_t argnum() const override;

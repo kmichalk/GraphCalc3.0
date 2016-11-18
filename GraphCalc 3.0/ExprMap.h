@@ -8,7 +8,8 @@
 class ExprMap
 {
 public:
-	virtual Expr* matchFunc(x::string const& funcName) const abstract;
+	virtual ArgExpr* matchFunc(x::string const& funcName) const abstract;
+	//virtual Expr* setArgs(Expr* base, x::vector<Expr*> const& args) const abstract;
 };
 
 #endif //_EXPR_MAP_H_

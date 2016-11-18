@@ -65,7 +65,7 @@ Axis::Parameters::Parameters(
 	float		axisThickness,
 	float		gridLinesThickness,
 	unsigned	numberSize,
-	basic_t		spacing)
+	float		spacing)
 	:
 	axisColor			{axisColor},
 	gridLinesColor		{gridLinesColor},
@@ -76,4 +76,4 @@ Axis::Parameters::Parameters(
 {
 }
 
-const Axis::Parameters Axis::Parameters::DEFAULT = {{170,170,170}, {70,70,70}, 2.0f, 1.0f, 10, 1.0};
+const Axis::Parameters Axis::Parameters::DEFAULT = {{170,170,170}, {70,70,70}, 2.0f, 1.0f, 12, 1.0};

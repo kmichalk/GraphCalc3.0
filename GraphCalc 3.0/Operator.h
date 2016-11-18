@@ -5,19 +5,19 @@
 #include "types.h"
 
 
-class OperatorExpr;
+class OperatorParser;
 
 class Operator
 {
 protected:
-	x::string sign_;
+	char identifier_;
 
 public:
-	OperatorExpr const& parentParser;
+	OperatorParser const& parentParser;
 
 	Operator(
-		OperatorExpr const& parentParser, 
-		x::string const& sign);
+		OperatorParser const& parentParser, 
+		char identifier);
 
 	virtual Expr* match(x::string const& text) const abstract;
 	virtual size_t argnum() const abstract;

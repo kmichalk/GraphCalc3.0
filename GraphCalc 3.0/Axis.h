@@ -23,7 +23,7 @@ public:
 		float axisThickness;
 		float gridLinesThickness;
 		unsigned numberSize;
-		basic_t spacing;
+		float spacing;
 
 		Parameters(
 			sf::Color axisColor,
@@ -31,7 +31,7 @@ public:
 			float axisThickness,
 			float gridLinesThickness,
 			unsigned numberSize,
-			basic_t spacing);
+			float spacing);
 	};
 
 protected:
@@ -42,7 +42,7 @@ protected:
 		sf::Vector2f	viewOffset;
 		float			beginPos;
 		size_t			divAmount;
-		basic_t			dispSpacing;
+		float			dispSpacing;
 		double			beginNum;
 		float			pos;
 	};

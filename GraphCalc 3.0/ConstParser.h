@@ -4,11 +4,11 @@
 #include "ExprParser.h"
 
 
-class ConstExpr:
+class ConstParser:
 	public ExprParser
 {
 public:
-	ConstExpr(CommandAnalizer const& parentAnalizer);
+	ConstParser(CommandAnalizer const& parentAnalizer);
 
 	virtual Expr* match(x::string const& text) const override;
 	virtual bool basicValidate(x::string const& text) const override;

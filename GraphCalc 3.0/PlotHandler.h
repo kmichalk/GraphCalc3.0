@@ -24,6 +24,7 @@ public:
 	virtual void draw(View& targetView) override;
 	void display();
 	void refresh();
+	void clear();
 };
 
 #endif //_PLOT_HANDLER_H_

@@ -16,6 +16,8 @@ using Size = crd<basic_t>;
 
 using Expr = x::math::expr<basic_t>;
 
+using ArgExpr = x::math::argexpr<basic_t>;
+
 template<size_t _nArg> 
 using Func = x::math::func<basic_t, _nArg>;
 

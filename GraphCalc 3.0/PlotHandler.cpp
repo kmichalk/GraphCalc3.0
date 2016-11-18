@@ -51,3 +51,8 @@ void PlotHandler::refresh()
 		plot->refresh();
 	}
 }
+
+void PlotHandler::clear()
+{
+	plots_.erase<x::PTR_DELETE>();
+}

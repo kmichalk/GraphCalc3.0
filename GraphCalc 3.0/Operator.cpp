@@ -2,15 +2,17 @@
 
 
 Operator::Operator(
-	OperatorExpr const & parentParser, 
-	x::string const & sign)
+	OperatorParser const & parentParser, 
+	char identifier)
 	:
 	parentParser{parentParser},
-	sign_{sign}
+	identifier_{identifier}
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 x::string Operator::getSign() const
 {
-	return sign_;
+	return identifier_;
 }

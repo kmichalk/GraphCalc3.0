@@ -10,6 +10,8 @@
 
 class Functions
 {
+	//static x::range<size_t> funcArgnum_;
+
 	static basic_t ctg_(basic_t x);
 	static basic_t sc_(basic_t x);
 	static basic_t csc_(basic_t x);
@@ -30,6 +32,13 @@ class Functions
 	static basic_t sub_(basic_t x1, basic_t x2);
 	static basic_t mult_(basic_t x1, basic_t x2);
 	static basic_t div_(basic_t x1, basic_t x2);
+
+	static basic_t lw_(basic_t x1, basic_t x2);
+	static basic_t le_(basic_t x1, basic_t x2);
+	static basic_t gt_(basic_t x1, basic_t x2);
+	static basic_t ge_(basic_t x1, basic_t x2);
+	static basic_t eq_(basic_t x1, basic_t x2);
+	static basic_t ne_(basic_t x1, basic_t x2);
 
 	static basic_t x_(basic_t x);
 	static basic_t neg_(basic_t x);
@@ -97,6 +106,7 @@ public:
 	
 	static constexpr basic_t(*poly)(std::initializer_list<basic_t>) = nullptr;
 
+	static constexpr FuncPtr<2> mod = ::fmod;
 	static constexpr FuncPtr<2> pow = ::pow;
 	static constexpr FuncPtr<2> log = log_;
 	static constexpr FuncPtr<2> rand = x::random<basic_t>;
@@ -108,12 +118,19 @@ public:
 	static constexpr FuncPtr<2> mult = mult_;
 	static constexpr FuncPtr<2> div = div_;
 
+	static constexpr FuncPtr<2> lw = lw_;
+	static constexpr FuncPtr<2> le = le_;
+	static constexpr FuncPtr<2> gt = gt_;
+	static constexpr FuncPtr<2> ge = ge_;
+	static constexpr FuncPtr<2> eq = eq_;
+	static constexpr FuncPtr<2> ne = ne_;
+
 
 	static x::strmap<FuncPtr<1>> oneArgFuncs;
 	static x::strmap<FuncPtr<2>> twoArgFuncs;
 	static x::strmap<FuncPtr<3>> threeArgFuncs;
 
-	static ExprMap* funcMap[3];
+	static ExprMap* funcMap[4];
 	/*template<size_t _nArg>
 	static inline enable_if<_nArg == 1,
 		FuncPtr<1>> getFunc(char const* str)
@@ -135,7 +152,7 @@ public:
 		return threeArgFuncs[str];
 	}*/
 
-	static Expr* matchFunc(x::string const& str, unsigned argnum);
+	static ArgExpr* matchFunc(x::string const& str, unsigned argnum);
 };
 
 #endif //_FUNCTIONS_H_

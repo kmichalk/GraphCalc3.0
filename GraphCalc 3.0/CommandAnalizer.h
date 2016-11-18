@@ -19,13 +19,13 @@ class CommandAnalizer
 public:
 	enum ErrorNum
 	{
-		PARSER_NULLPTR
+		PARSER_NULLPTR, INVALID_EXPRESSION
 	};
 
 	CommandAnalizer();
 
 	Expr* process(x::string line) const;
-	Expr* parse(x::string const& line) const;
+	Expr* parse(x::string & line) const;
 	void addParser(ExprParser* parser);
 	void addParser(ExprParser* parser, size_t priority);
 	basic_t* currentVar() const;

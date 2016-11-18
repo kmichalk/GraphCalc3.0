@@ -1,28 +1,30 @@
 #include "PrefixOperator.h"
 #include "Functions.h"
-#include "OperatorExpr.h"
+#include "OperatorParser.h"
 #include "CommandAnalizer.h"
 
 
 PrefixOperator::PrefixOperator(
-	OperatorExpr const & parentParser, 
-	x::string const & sign)
+	OperatorParser const & parentParser, 
+	char identifier)
 	:
-	Operator(parentParser, sign)
+	Operator(parentParser, identifier)
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 Expr * PrefixOperator::match(x::string const & text) const
 {
-	if (text.front(sign_.size()) == sign_)
-		if (FuncPtr<1> funcPtr = Functions::oneArgFuncs[sign_.data()])
+	if (text.first() == identifier_)
+		if (auto funcPtr = Functions::oneArgFuncs[x::string{identifier_}.data()])
 			return new Func<1>{
-				funcPtr,	
-				parentParser.parentAnalizer.parse(text.substr(sign_.size()))};
+				funcPtr(),	
+				parentParser.parentAnalizer.parse(text.substr(1))};
 	return nullptr;
 }
 
 size_t PrefixOperator::argnum() const
 {
-	return ARGNUM_;
+	return 1;
 }

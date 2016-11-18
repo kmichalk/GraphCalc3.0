@@ -50,20 +50,22 @@ CommandAnalizer::~CommandAnalizer()
 Expr * CommandAnalizer::process(x::string line) const
 {
 	line.remove_if(x::is_whitespace);
-	removeMarginBrackets_(line);
 	return parse(line);
 }
 
-Expr * CommandAnalizer::parse(x::string const & line) const
+Expr * CommandAnalizer::parse(x::string & line) const
 {
-	//const_foreach(parser, parsers_) {
+	removeMarginBrackets_(line);
 	Expr* result = nullptr;
-	for (auto parser{parsers_.cbegin()};parser; ++parser){
+	const_foreach(parser,parsers_){
 		if (!*parser) throw ERROR_PARSER_NULLPTR;
 		if (parser->basicValidate(line) && (result = parser->match(line)))
 			return result;
 	}
-	return nullptr;
+	throw x::error<CommandAnalizer>{
+		INVALID_EXPRESSION, 
+		(x::string{"CommandAnalizer: invalid expression: "}+line).move_data()};
+	//return nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

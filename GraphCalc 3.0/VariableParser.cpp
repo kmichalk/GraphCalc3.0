@@ -1,8 +1,8 @@
-#include "VariableExpr.h"
+#include "VariableParser.h"
 #include "CommandAnalizer.h"
 
 
-VariableExpr::VariableExpr(
+VariableParser::VariableParser(
 	CommandAnalizer const & parentAnalizer,
 	x::string const& varName)
 	:
@@ -13,13 +13,13 @@ VariableExpr::VariableExpr(
 
 ///////////////////////////////////////////////////////////////////////////////
 
-Expr * VariableExpr::match(x::string const & text) const
+Expr * VariableParser::match(x::string const & text) const
 {
 	std::cout << "match var: " << text << std::endl;
 	return text == varName_ ? new Func<1>{Functions::x} : nullptr;
 }
 
-bool VariableExpr::basicValidate(x::string const & text) const
+bool VariableParser::basicValidate(x::string const & text) const
 {
 	std::cout << "validate var: " << text << std::endl;
 	return text.size() == varName_.size();

@@ -32,12 +32,13 @@ DragHandler::DragHandler(Application& parent)
 
 void DragHandler::hook(View * targetView)
 {
-	if (targetView) {
-		targetView_ = targetView;
-		dragBeginMousePos_ = relativeMousePos_();
-		dragBeginOffset_ = targetView_->getOffset();
-	}
-	else throw x::error<DragHandler>{};
+	if (!targetView) throw ERROR_VIEW_NULLPTR_;
+	if (!targetView->window->hasFocus()) return;
+		//throw ERROR_WINDOW_NO_FOCUS_;
+
+	targetView_ = targetView;
+	dragBeginMousePos_ = relativeMousePos_();
+	dragBeginOffset_ = targetView_->getOffset();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,3 +65,13 @@ void DragHandler::process()
 	//targetLock_ = false;
 	//else throw x::error<DragHandler>{};
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+x::error<DragHandler> const DragHandler::ERROR_VIEW_NULLPTR_ = {
+	DragHandler::VIEW_NULLPTR, 
+	"DragHandler: Cannot hook, target View was nullptr."};
+
+x::error<DragHandler> const DragHandler::ERROR_WINDOW_NO_FOCUS_ = {
+	DragHandler::WINDOW_NO_FOCUS,
+	"DragHandler: Cannot hook, window has no focus."};

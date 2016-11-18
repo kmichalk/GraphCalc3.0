@@ -4,7 +4,7 @@
 #include "ExprParser.h"
 
 
-class VariableExpr:
+class VariableParser:
 	public ExprParser
 {
 	static constexpr char const DEFAULT_VAR_NAME[] = "x";
@@ -12,7 +12,7 @@ class VariableExpr:
 	x::string varName_;
 
 public:
-	VariableExpr(
+	VariableParser(
 		CommandAnalizer const& parentAnalizer, 
 		x::string const& varName = DEFAULT_VAR_NAME);
 

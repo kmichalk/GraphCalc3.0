@@ -1,28 +1,30 @@
 #include "PostfixOperator.h"
 #include "Functions.h"
-#include "OperatorExpr.h"
+#include "OperatorParser.h"
 #include "CommandAnalizer.h"
 
 
 PostfixOperator::PostfixOperator(
-	OperatorExpr const & parentParser, 
-	x::string const & sign)
+	OperatorParser const & parentParser, 
+	char identifier)
 	:
-	Operator(parentParser, sign)
+	Operator(parentParser, identifier)
 {
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 Expr * PostfixOperator::match(x::string const & text) const
 {
-	if (text.back(sign_.size()) == sign_)
-		if (FuncPtr<1> funcPtr = Functions::oneArgFuncs[sign_.data()])
+	if (text.last() == identifier_)
+		if (auto funcPtr = Functions::oneArgFuncs[x::string{identifier_}.data()])
 			return new Func<1>{
-			funcPtr,
-			parentParser.parentAnalizer.parse(text.substr(sign_.size()))};
+			funcPtr(),
+			parentParser.parentAnalizer.parse(text.substr(0, text.last_pos() - 1))};
 	return nullptr;
 }
 
 size_t PostfixOperator::argnum() const
 {
-	return ARGNUM_;
+	return 1;
 }

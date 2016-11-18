@@ -22,9 +22,6 @@
     <Filter Include="Application">
       <UniqueIdentifier>{3e14ebf0-ef9f-4b1f-b5d6-7144031a6fee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Service">
-      <UniqueIdentifier>{41d0b6fc-4b4b-435a-aa2c-cd12e22cc9f4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Parser">
       <UniqueIdentifier>{8349d9b1-bfc7-4438-a0ab-97df12a290d1}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="Global\Functions">
       <UniqueIdentifier>{ddf1f383-c662-4e4c-897d-9f7b981620a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Service">
+      <UniqueIdentifier>{41d0b6fc-4b4b-435a-aa2c-cd12e22cc9f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,19 +58,16 @@
       <Filter>Application</Filter>
     </ClInclude>
     <ClInclude Include="ServiceHandler.h">
-      <Filter>Service</Filter>
+      <Filter>Application\Service</Filter>
     </ClInclude>
     <ClInclude Include="DragHandler.h">
-      <Filter>Service</Filter>
+      <Filter>Application\Service</Filter>
     </ClInclude>
     <ClInclude Include="ExprParser.h">
       <Filter>Parser</Filter>
     </ClInclude>
     <ClInclude Include="constants.h">
       <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="FunctionExpr.h">
-      <Filter>Parser</Filter>
     </ClInclude>
     <ClInclude Include="DrawingHandler.h">
       <Filter>Draw</Filter>
@@ -99,15 +96,6 @@
     <ClInclude Include="CommandAnalizer.h">
       <Filter>Parser</Filter>
     </ClInclude>
-    <ClInclude Include="OperatorExpr.h">
-      <Filter>Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="VariableExpr.h">
-      <Filter>Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstExpr.h">
-      <Filter>Parser</Filter>
-    </ClInclude>
     <ClInclude Include="Operator.h">
       <Filter>Parser\Operator</Filter>
     </ClInclude>
@@ -132,6 +120,30 @@
     <ClInclude Include="ExprMap.h">
       <Filter>Global\Functions</Filter>
     </ClInclude>
+    <ClInclude Include="FunctionParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Service.h">
+      <Filter>Application\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowEventHandler.h">
+      <Filter>Application\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="PredefConstParser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="PredefConstMap.h">
+      <Filter>Global\Functions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Plot.cpp">
@@ -150,15 +162,12 @@
       <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="ServiceHandler.cpp">
-      <Filter>Service</Filter>
+      <Filter>Application\Service</Filter>
     </ClCompile>
     <ClCompile Include="DragHandler.cpp">
-      <Filter>Service</Filter>
+      <Filter>Application\Service</Filter>
     </ClCompile>
     <ClCompile Include="ExprParser.cpp">
-      <Filter>Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="FunctionExpr.cpp">
       <Filter>Parser</Filter>
     </ClCompile>
     <ClCompile Include="DrawingHandler.cpp">
@@ -182,15 +191,6 @@
     <ClCompile Include="CommandAnalizer.cpp">
       <Filter>Parser</Filter>
     </ClCompile>
-    <ClCompile Include="OperatorExpr.cpp">
-      <Filter>Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="VariableExpr.cpp">
-      <Filter>Parser</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstExpr.cpp">
-      <Filter>Parser</Filter>
-    </ClCompile>
     <ClCompile Include="Operator.cpp">
       <Filter>Parser\Operator</Filter>
     </ClCompile>
@@ -208,6 +208,27 @@
     </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Global\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ExprMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OperatorParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionParser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PredefConstParser.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

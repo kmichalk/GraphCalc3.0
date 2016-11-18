@@ -115,6 +115,48 @@ basic_t Functions::div_(basic_t x1, basic_t x2)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+basic_t Functions::lw_(basic_t x1, basic_t x2)
+{
+	return x1 < x2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+basic_t Functions::le_(basic_t x1, basic_t x2)
+{
+	return x1 <= x2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+basic_t Functions::gt_(basic_t x1, basic_t x2)
+{
+	return x1 > x2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+basic_t Functions::ge_(basic_t x1, basic_t x2)
+{
+	return x1 >= x2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+basic_t Functions::eq_(basic_t x1, basic_t x2)
+{
+	return x1 == x2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+basic_t Functions::ne_(basic_t x1, basic_t x2)
+{
+	return x1 != x2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 basic_t Functions::x_(basic_t x)
 {
 	return x;
@@ -136,17 +178,17 @@ basic_t Functions::log_(basic_t b, basic_t x)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-Expr * Functions::matchFunc(x::string const & str, unsigned argnum)
+ArgExpr * Functions::matchFunc(x::string const & str, unsigned argnum)
 {
-	if (argnum < sizeof(funcMap)) {
-		return funcMap[argnum]->matchFunc(str);
-	}
-	return nullptr;
+	if (argnum >= sizeof(funcMap) || !funcMap[argnum]) return nullptr;
+	return funcMap[argnum]->matchFunc(str);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 x::strmap<FuncPtr<1>> Functions::oneArgFuncs = {
+	{"-", Functions::neg},
+
 	{"sin", Functions::sin},
 	{"cos", Functions::cos},
 	{"tg", Functions::tg},
@@ -194,7 +236,15 @@ x::strmap<FuncPtr<2>> Functions::twoArgFuncs = {
 	{"-", Functions::sub},
 	{"*", Functions::mult},
 	{"/", Functions::div},
+	{"%", Functions::mod},
 	{"^", Functions::pow},
+
+	{"<", Functions::lw},
+	{"<=", Functions::le},
+	{">", Functions::gt},
+	{">=", Functions::ge},
+	{"=", Functions::eq},
+	{"~", Functions::ne},
 
 	{"log", Functions::log},
 	{"rand", Functions::rand},
@@ -205,7 +255,9 @@ x::strmap<FuncPtr<2>> Functions::twoArgFuncs = {
 
 x::strmap<FuncPtr<3>> Functions::threeArgFuncs = {};
 
-ExprMap* Functions::funcMap[3] = {
+ExprMap* Functions::funcMap[4] = {
+	nullptr,
+
 	new FuncMap<1>{
 		{"sin", Functions::sin},
 		{"cos", Functions::cos},
