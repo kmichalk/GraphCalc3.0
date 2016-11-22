@@ -16,10 +16,10 @@ PrefixOperator::PrefixOperator(
 
 Expr * PrefixOperator::match(x::string const & text) const
 {
-	if (text.first() == identifier_)
+	if (*text.first() == identifier_)
 		if (auto funcPtr = Functions::oneArgFuncs[x::string{identifier_}.data()])
 			return new Func<1>{
-				funcPtr(),	
+				*funcPtr,	
 				parentParser.parentAnalizer.parse(text.substr(1))};
 	return nullptr;
 }

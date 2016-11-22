@@ -3,6 +3,6 @@
 
 int main(int argc, char const* argv[])
 {
-	Application application;
+	Application application{std::cout};
 	application.run();
 }

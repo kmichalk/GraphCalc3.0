@@ -2,15 +2,27 @@
 #include "loops.h"
 
 
-ServiceHandler::ServiceHandler(Application & parent)
+ServiceHandler::ServiceHandler(Application & parentApplication)
 	:
-	AppComponent(parent)
+	AppComponent(parentApplication),
+	TimedProcess()
 {
 }
 
-void ServiceHandler::run()
+ServiceHandler::ServiceHandler(
+	Application & parentApplication,
+	double processPeriod)
+	:
+	AppComponent(parentApplication),
+	TimedProcess(processPeriod)
 {
+}
 
+void ServiceHandler::task()
+{
+	foreach(service, services_) {
+		service->process();
+	}
 }
 
 void ServiceHandler::addService(Service * service)
@@ -18,9 +30,12 @@ void ServiceHandler::addService(Service * service)
 	services_.push_back(service);
 }
 
-void ServiceHandler::process()
+void ServiceHandler::clear()
 {
-	foreach(service, services_){
-		service->process();
-	}
+	services_.erase<x::PTR_DELETE>();
+}
+
+ServiceHandler::~ServiceHandler()
+{
+	clear();
 }

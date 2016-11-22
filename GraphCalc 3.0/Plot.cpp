@@ -4,8 +4,8 @@
 sf::Vertex Plot::calcPlotPoint_(basic_t xVal)
 {
 	return sf::Vertex{
-		targetView_.convert({xVal, (*func_)(xVal)}),
-		parameters.plotColor};
+		targetView_.dispPos({xVal, (*func_)(xVal)}),
+		parameters.color};
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,6 +66,11 @@ void Plot::refresh()
 	}
 }
 
+Expr * Plot::getFunc() const
+{
+	return func_;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 //void Plot::setViewRange(Point const & viewMin, Point const & viewMax)
@@ -82,16 +87,17 @@ Plot::~Plot()
 ///////////////////////////////////////////////////////////////////////////////
 
 Plot::Parameters::Parameters(
-	sf::Color const & plotColor,
-	sf::Color const & backgroundColor)
+	x::string const & funcName,
+	sf::Color const & color)
 	:
-	plotColor{plotColor}
+	funcName{funcName},
+	color{color}
 {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 const Plot::Parameters Plot::Parameters::DEFAULT = {
-	{255,255,255},
-	{0	,0	,0	}};
+	"f",
+	{255,255,255}};
 

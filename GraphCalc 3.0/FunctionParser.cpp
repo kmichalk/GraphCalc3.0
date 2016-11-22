@@ -52,7 +52,7 @@ Expr * FunctionParser::makeFunc_(x::string const& funcName, x::vector<x::string>
 
 FunctionParser::FunctionParser(CommandAnalizer const& parentAnalizer)
 	:
-	ExprParser(parentAnalizer)
+	Parser(parentAnalizer)
 {
 }
 
@@ -62,13 +62,15 @@ Expr * FunctionParser::match(x::string const& text) const
 {
 	std::cout << "match func: " << text << std::endl;
 	auto left = text.find_first('(');
-	if (!left) return nullptr;
-	auto right = text.match_bracket(left.value);
-	if (!right) return nullptr;
+	if (!left) 
+		return nullptr;
+	auto right = text.match_bracket(*left);
+	if (!right) 
+		return nullptr;
 
 	return makeFunc_(
-		text.substr(0, left.value - 1).move(),
-		text.substr(left.value + 1, right.value - 1).separate(',').move());
+		text.substr(0, *left - 1),
+		text.substr(*left + 1, *right - 1).separate(','));
 }
 
 bool FunctionParser::basicValidate(x::string const & text) const
@@ -76,5 +78,5 @@ bool FunctionParser::basicValidate(x::string const & text) const
 	std::cout << "validate func: " << text << std::endl;
 	return
 		text.size() > 3 &&
-		text.last() == ')';
+		*text.last() == ')';
 }

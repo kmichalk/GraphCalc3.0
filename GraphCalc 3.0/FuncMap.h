@@ -23,7 +23,7 @@ template<unsigned _nArg>
 ArgExpr * FuncMap<_nArg>::matchFunc(x::string const & funcName) const
 {
 	if (auto funcPtr = (*x::rem_const(this))[funcName.data()])
-		return new Func<_nArg>{funcPtr()};
+		return new Func<_nArg>{*funcPtr};
 	return nullptr;
 }
 

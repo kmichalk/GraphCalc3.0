@@ -6,7 +6,7 @@ VariableParser::VariableParser(
 	CommandAnalizer const & parentAnalizer,
 	x::string const& varName)
 	:
-	ExprParser(parentAnalizer),
+	Parser(parentAnalizer),
 	varName_{varName}
 {
 }

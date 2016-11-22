@@ -4,11 +4,14 @@
 #include "SFML\Graphics.hpp"
 #include "types.h"
 #include "abstract.h"
+#include "AppComponent.h"
+#include "flag.h"
 
 
 class Application;
 
-class View
+class View:
+	public AppComponent
 {
 	enum ErrorNum
 	{
@@ -26,11 +29,11 @@ class View
 	sf::Vector2f offset_;
 	sf::Vector2f crdBegin_;
 	double calcDensity_;
-	mutable bool changed_;
 	//bool revY_;
 
 public:
 	Size scale;
+	mutable x::readonly_flag<View> changed;
 
 	struct Parameters
 	{
@@ -48,7 +51,6 @@ public:
 			sf::Color backgroundColor);
 	};
 
-	Application const& parentApp;
 	sf::RenderWindow* window;
 	/*View(
 	sf::RenderTarget const*	target,
@@ -56,20 +58,21 @@ public:
 	Point	viewMax = {0.0,0.0},
 	bool	revY_	= false);*/
 
-	View(Application const& parentApp);
+	View(Application & parentApplication);
 
 	View(
-		Application const& parentApp,
+		Application & parentApplication,
 		sf::RenderWindow* target,
 		Size scale = DEFAULT_SCALE);
 
 	//View& operator=(View const& other);	
-	void init(Parameters const& parameters);
+	void initialize(Parameters const& parameters);
 
 	void display();
 	void clear();
 
-	sf::Vector2f convert(Point pos) const;
+	sf::Vector2f dispPos(Point const& pos) const;
+	Point realPos(sf::Vector2f const& pos) const;
 	//void setTarget(sf::RenderWindow* target);
 	void setViewRange(Point const& viewMin, Point const& viewMax);
 	//void setReverseY(bool value);
@@ -80,7 +83,8 @@ public:
 	sf::Vector2f getCrdBegin() const;
 	void center();
 	void setCalcDensity(double value);
-	bool changed() const;
+	//bool changed() const;
+	void readjust();
 	void clearFlags() const;
 
 	~View();

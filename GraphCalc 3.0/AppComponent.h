@@ -7,10 +7,11 @@ class Application;
 class AppComponent
 {
 protected:
-	Application& parent_;
 
 public:
-	AppComponent(Application& parent);
+	Application& parentApplication;
+
+	AppComponent(Application& parentApplication);
 
 };
 

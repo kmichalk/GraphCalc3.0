@@ -12,9 +12,9 @@ class WindowEventHandler:
 	void readjustView_() const;
 
 public:
-	View& parentView;
+	View& targetView;
 
-	WindowEventHandler(View& parentView);
+	WindowEventHandler(View& targetView);
 
 	virtual void process() override;
 };

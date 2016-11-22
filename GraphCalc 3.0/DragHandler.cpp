@@ -1,10 +1,26 @@
 #include "DragHandler.h"
 #include "View.h"
+#include "Application.h"
 
 
 sf::Vector2f DragHandler::relativeMousePos_()
 {
-	return (sf::Vector2f)sf::Mouse::getPosition(*targetView_->window);
+	return (sf::Vector2f)sf::Mouse::getPosition(*targetView.window);
+}
+
+void DragHandler::initialize_()
+{
+	parentApplication.addEvent(new KeyPressEvent{
+		WKey::LMB,
+		true,
+		x::Fn<DragHandler, void()>{ this, &DragHandler::hook }
+	});
+
+	parentApplication.addEvent(new KeyReleaseEvent{
+		WKey::LMB,
+		true,
+		x::Fn<DragHandler, void()>{ this, &DragHandler::unhook }
+	});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,60 +34,47 @@ sf::Vector2f DragHandler::relativeMousePos_()
 
 ///////////////////////////////////////////////////////////////////////////////
 
-DragHandler::DragHandler(Application& parent)
+DragHandler::DragHandler(View & targetView)
 	:
-	ServiceHandler		(parent),
-	targetView_			{nullptr},
+	Service(targetView.parentApplication),
+	targetView{targetView},
 	dragBeginMousePos_	{0.0f,0.0f},
 	dragBeginOffset_	{0.0f,0.0f},
-	targetLock_			{false}
+	hooked_{false}
 {
+	initialize_();
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-void DragHandler::hook(View * targetView)
+void DragHandler::hook()
 {
-	if (!targetView) throw ERROR_VIEW_NULLPTR_;
-	if (!targetView->window->hasFocus()) return;
-		//throw ERROR_WINDOW_NO_FOCUS_;
-
-	targetView_ = targetView;
+	if (!targetView.window->hasFocus()) return;
+	hooked_.on();
 	dragBeginMousePos_ = relativeMousePos_();
-	dragBeginOffset_ = targetView_->getOffset();
+	dragBeginOffset_ = targetView.getOffset();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void DragHandler::unhook()
 {
-	/*unsigned count{0};
-	while (targetLock_) {
-		++count;
-	}
-	std::cout<< count<<std::endl;*/
-	targetView_ = nullptr;
+	hooked_.off();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void DragHandler::process()
 {
-	//targetLock_ = true;
-	auto targetViewLock = targetView_;
-	if (targetViewLock) {
-		targetViewLock->setOffset(relativeMousePos_() - dragBeginMousePos_ + dragBeginOffset_);
+	if (hooked_) {
+		targetView.setOffset(relativeMousePos_() - dragBeginMousePos_ + dragBeginOffset_);
 	}
-	//targetLock_ = false;
-	//else throw x::error<DragHandler>{};
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 x::error<DragHandler> const DragHandler::ERROR_VIEW_NULLPTR_ = {
 	DragHandler::VIEW_NULLPTR, 
-	"DragHandler: Cannot hook, target View was nullptr."};
+	"Cannot hook, target View was nullptr."};
 
 x::error<DragHandler> const DragHandler::ERROR_WINDOW_NO_FOCUS_ = {
 	DragHandler::WINDOW_NO_FOCUS,
-	"DragHandler: Cannot hook, window has no focus."};
+	"Cannot hook, window has no focus."};

@@ -8,6 +8,9 @@ class View;
 
 class DrawTask
 {
+protected:
+	DrawTask();
+
 public:
 	x::flag visible;
 

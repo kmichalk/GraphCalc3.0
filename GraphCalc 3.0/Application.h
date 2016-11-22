@@ -3,10 +3,11 @@
 
 #include "PlotHandler.h"
 #include "DragHandler.h"
-#include "DrawingHandler.h"
 #include "threaded.h"
 #include "keyevent.h"
 #include "CommandAnalizer.h"
+#include "DrawHandler.h"
+
 
 class Application:
 	public MainThread
@@ -34,7 +35,7 @@ private:
 	PlotHandler plotHandler_;
 	CommandAnalizer commandAnalizer_;
 	EventHandler<x::ExceptionHandling::X_ERRORS> eventHandler_;
-	DrawingHandler drawingHandler_;
+	DrawHandler drawingHandler_;
 	sf::Event windowEvent_;
 
 	//void processWindowEvents_();
@@ -46,14 +47,17 @@ private:
 
 public:
 	Parameters parameters;
+	std::ostream& logStream;
 
 	Application(
+		std::ostream& logStream,
 		View::Parameters const& viewParamters = View::Parameters::DEFAULT);
 
 	virtual void process() override;
 	virtual void prepare() override;
 
 	void initView();
+	void addEvent(Event* event);
 
 	virtual ~Application();
 };

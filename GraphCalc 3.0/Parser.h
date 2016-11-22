@@ -8,12 +8,12 @@
 
 class CommandAnalizer;
 
-class ExprParser
+class Parser
 {
 public:
 	CommandAnalizer const& parentAnalizer;
 
-	ExprParser(CommandAnalizer const& parentAnalizer);
+	Parser(CommandAnalizer const& parentAnalizer);
 
 	virtual Expr* match(x::string const& text) const abstract;
 	virtual bool basicValidate(x::string const& text) const abstract;

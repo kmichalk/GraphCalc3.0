@@ -1,13 +1,13 @@
-#include "ExprParser.h"
+#include "Parser.h"
 #include "loops.h"
 
 
-//Expr * ExprParser::matchExpr_(char const * text)
+//Expr * Parser::matchExpr_(char const * text)
 //{
 //	return exprMap_[text];
 //}
 //
-//Expr* ExprParser::matchOperator_(char ch)
+//Expr* Parser::matchOperator_(char ch)
 //{
 //	static x::vector<char> operators{operators_};
 //
@@ -17,7 +17,7 @@
 //	return nullptr;
 //}
 //
-//Expr * ExprParser::parseAddSub_(x::string const & text)
+//Expr * Parser::parseAddSub_(x::string const & text)
 //{
 //	unsigned nesting = 0;
 //	for (size_t ch = 0; ch < text.size(); ++ch) {
@@ -29,18 +29,18 @@
 //			if (text[ch] == '+') {
 //				return new Func<2>{Functions::add,
 //					parse_(text.substr(0, ch - 1)),
-//					parse_(text.substr(ch + 1, text.last_pos()))};
+//					parse_(text.substr(ch + 1, text.lastpos()))};
 //			}
 //			if (text[ch] == '-') {
 //				return new Func<2>{Functions::sub,
 //					parse_(text.substr(0, ch - 1)),
-//					parse_(text.substr(ch + 1, text.last_pos()))};
+//					parse_(text.substr(ch + 1, text.lastpos()))};
 //			}
 //		}
 //	}
 //}
 //
-//Expr * ExprParser::parseMultDiv_(x::string const & text)
+//Expr * Parser::parseMultDiv_(x::string const & text)
 //{
 //	unsigned nesting = 0;
 //	for (size_t ch = 0; ch < text.size(); ++ch) {
@@ -52,18 +52,18 @@
 //			if (text[ch] == '*') {
 //				return new Func<2>{Functions::mult,
 //					parse_(text.substr(0, ch - 1)),
-//					parse_(text.substr(ch + 1, text.last_pos()))};
+//					parse_(text.substr(ch + 1, text.lastpos()))};
 //			}
 //			if (text[ch] == '/') {
 //				return new Func<2>{Functions::div,
 //					parse_(text.substr(0, ch - 1)),
-//					parse_(text.substr(ch + 1, text.last_pos()))};
+//					parse_(text.substr(ch + 1, text.lastpos()))};
 //			}
 //		}
 //	}
 //}
 //
-//Expr * ExprParser::parseOperators_(size_t order, x::string const & text)
+//Expr * Parser::parseOperators_(size_t order, x::string const & text)
 //{
 //	/*unsigned nesting = 0;
 //	for (size_t ch = 0; ch < text.size(); ++ch) {
@@ -78,7 +78,7 @@
 //						
 //					},
 //						parse_(text.substr(0, ch - 1)),
-//						parse_(text.substr(ch + 1, text.last_pos()))};
+//						parse_(text.substr(ch + 1, text.lastpos()))};
 //				}
 //			}
 //		}
@@ -88,7 +88,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-//Expr * ExprParser::parseOperator_(x::string const & text)
+//Expr * Parser::parseOperator_(x::string const & text)
 //{
 //	parseAddSub_(text);
 //	parseMultDiv_(text);
@@ -97,7 +97,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-//Expr * ExprParser::parsePowRest_(x::string const & text)
+//Expr * Parser::parsePowRest_(x::string const & text)
 //{
 //	unsigned nesting = 0;
 //	for (size_t ch = 0; ch < text.size(); ++ch) {
@@ -109,13 +109,13 @@
 //			if (text[ch] == '^') {
 //				return new Func<2>{Functions::div,
 //					parse_(text.substr(0, ch - 1)),
-//					parse_(text.substr(ch + 1, text.last_pos()))};
+//					parse_(text.substr(ch + 1, text.lastpos()))};
 //			}
 //		}
 //	}
 //}
 
-//Expr * ExprParser::matchBracket_(x::string forward)
+//Expr * Parser::matchBracket_(x::string forward)
 //{
 //	unsigned nesting = 0;
 //	for (size_t ch = 0; ch < forward.size(); ++ch) {
@@ -127,17 +127,17 @@
 //	}
 //}
 
-//Expr * ExprParser::parse_(x::string text)
+//Expr * Parser::parse_(x::string text)
 //{
 //	parseOperator_(text);
 //	return nullptr;
 //}
 
-//ExprParser::ExprParser()
+//Parser::Parser()
 //{
 //}
 
-//Expr * ExprParser::parse(x::string const& line)
+//Expr * Parser::parse(x::string const& line)
 //{
 //	//line_ = line;
 //	//parse_(line);
@@ -151,7 +151,7 @@
 //	return nullptr;
 //}
 
-ExprParser::ExprParser(CommandAnalizer const & parentAnalizer)
+Parser::Parser(CommandAnalizer const & parentAnalizer)
 	:
 	parentAnalizer{parentAnalizer}
 {

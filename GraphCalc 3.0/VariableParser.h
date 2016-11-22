@@ -1,11 +1,11 @@
 #ifndef _XEXPR_H_
 #define _XEXPR_H_
 
-#include "ExprParser.h"
+#include "Parser.h"
 
 
 class VariableParser:
-	public ExprParser
+	public Parser
 {
 	static constexpr char const DEFAULT_VAR_NAME[] = "x";
 

@@ -2,7 +2,7 @@
 #define _PLOT_HANDLER_H_
 
 #include "Plot.h"
-
+#include "CommandAnalizer.h"
 
 class PlotHandler:
 	public DrawTask
@@ -21,7 +21,10 @@ public:
 		Expr* func,
 		Plot::Parameters const& parameters = Plot::Parameters::DEFAULT);
 
+	void createPlot(x::vector<CommandAnalizer::ParseResult> const& plots);
+
 	virtual void draw(View& targetView) override;
+	x::result<Plot*> findFunc(x::string const name);
 	void display();
 	void refresh();
 	void clear();

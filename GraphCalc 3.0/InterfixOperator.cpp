@@ -10,7 +10,7 @@ x::result<size_t> InterfixOperator::findOperator_(x::string const & text) const
 	for (auto ch{text.cbegin()}; ch; ++ch) {
 		if (*ch == '(') ++nesting;
 		if (*ch == ')') --nesting;
-		if (*ch == identifier_ && nesting == 0 && ch.pos!=0 && ch.pos!=text.last_pos()) return ch.pos;
+		if (*ch == identifier_ && nesting == 0 && ch.pos!=0 && ch.pos!=text.lastpos()) return ch.pos;
 	}
 	return x::result<size_t>::INVALID;
 }
@@ -29,13 +29,12 @@ InterfixOperator::InterfixOperator(
 
 Expr * InterfixOperator::match(x::string const & text) const
 {
-	auto opPos = findOperator_(text);
-	if (opPos.valid) {
+	if (auto opPos = findOperator_(text)) {
 		if (auto funcPtr = Functions::twoArgFuncs[x::string{identifier_}.data()]) {
 			return new Func<2>{
-				funcPtr(),
-				parentParser.parentAnalizer.parse(text.substr(0, opPos.value - 1)),
-				parentParser.parentAnalizer.parse(text.substr(opPos.value + 1))};
+				*funcPtr,
+				parentParser.parentAnalizer.parse(text.substr(0, *opPos - 1)),
+				parentParser.parentAnalizer.parse(text.substr(*opPos + 1))};
 		}
 	}
 	return nullptr;

@@ -16,11 +16,11 @@ PostfixOperator::PostfixOperator(
 
 Expr * PostfixOperator::match(x::string const & text) const
 {
-	if (text.last() == identifier_)
+	if (*text.last() == identifier_)
 		if (auto funcPtr = Functions::oneArgFuncs[x::string{identifier_}.data()])
 			return new Func<1>{
-			funcPtr(),
-			parentParser.parentAnalizer.parse(text.substr(0, text.last_pos() - 1))};
+			*funcPtr,
+			parentParser.parentAnalizer.parse(text.substr(0, text.lastpos() - 1))};
 	return nullptr;
 }
 

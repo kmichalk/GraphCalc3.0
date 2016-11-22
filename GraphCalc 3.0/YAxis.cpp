@@ -36,7 +36,7 @@ void YAxis::refreshNumbers_()
 	x::range<double> nearZero{-0.1*abs(parameters.spacing), 0.1*abs(parameters.spacing)};
 	sf::Text number{
 		"",
-		parentGrid.targetView.parentApp.parameters.font,
+		parentGrid.targetView.parentApplication.parameters.font,
 		parameters.numberSize};
 
 	double revFlag = x::sgn(parentGrid.targetView.scale.y);

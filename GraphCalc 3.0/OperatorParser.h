@@ -1,14 +1,14 @@
 #ifndef _CENTER_DELIMITED_EXPR_H_
 #define _CENTER_DELIMITED_EXPR_H_
 
-#include "ExprParser.h"
+#include "Parser.h"
 #include "xvector.h"
 
 
 class Operator;
 
 class OperatorParser:
-	public ExprParser
+	public Parser
 {
 	x::vector<Operator*> operatorPriority_;
 

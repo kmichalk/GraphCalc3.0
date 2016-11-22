@@ -1,34 +1,57 @@
 #ifndef _COMMAND_ANALIZER_H_
 #define _COMMAND_ANALIZER_H_
 
-#include "ExprParser.h"
+#include "Parser.h"
+#include "AppComponent.h"
+#include "CommandValidator.h"
+//#include "Plot.h"
 
+class Plot;
+class AnalizerComponent;
 
-class CommandAnalizer
+class CommandAnalizer:
+	public AppComponent
 {
-	static constexpr unsigned DEFAULT_MAX_DEPTH = 10;
-	static const x::error<CommandAnalizer> ERROR_PARSER_NULLPTR;
+	static const unsigned DEFAULT_MAX_DEPTH_;
+	static const x::error<CommandAnalizer> ERROR_PARSER_NULLPTR_;
+	static const x::error<CommandAnalizer> ERROR_MAX_DEPTH_;
+	static const char DEFAULT_ARG_NAME_;
 
-	x::vector<ExprParser*> parsers_;
-	unsigned depth_;
+	x::vector<Parser*> parsers_;
+	x::vector<AnalizerComponent*> components_;
+	CommandValidator validator_;
+	mutable unsigned depth_;
 	unsigned maxDepth_;
-	basic_t* var_;
+	//basic_t* var_;
 
 	void removeMarginBrackets_(x::string& line) const;
+	bool assertDepth_() const;
 
 public:
-	enum ErrorNum
+	struct ParseResult
 	{
-		PARSER_NULLPTR, INVALID_EXPRESSION
+		Expr* func;
+		x::string funcName;
+		char argName;
+
+		ParseResult();
 	};
 
-	CommandAnalizer();
+	enum ErrorNum
+	{
+		PARSER_NULLPTR, INVALID_EXPRESSION, MAX_DEPTH
+	};
 
-	Expr* process(x::string line) const;
+	x::vector<ParseResult> plotBuffer;
+
+	CommandAnalizer(Application& parentApplication);
+
+	void process(x::string line);
 	Expr* parse(x::string & line) const;
-	void addParser(ExprParser* parser);
-	void addParser(ExprParser* parser, size_t priority);
-	basic_t* currentVar() const;
+	void analize(x::string line);
+	void addParser(Parser* parser);
+	void addParser(Parser* parser, size_t priority);
+	//basic_t* currentVar() const;
 
 	~CommandAnalizer();
 };

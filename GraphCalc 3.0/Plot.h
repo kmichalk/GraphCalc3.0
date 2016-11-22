@@ -1,7 +1,7 @@
 #ifndef _PLOT_H_
 #define _PLOT_H_
 
-#include "xvector.h"
+#include "xstring.h"
 #include "View.h"
 #include "wrap.h"
 #include "DrawTask.h"
@@ -24,12 +24,12 @@ public:
 	{
 		static const Parameters DEFAULT;
 
-		sf::Color plotColor;
-		sf::Color backgroundColor;
+		x::string funcName;
+		sf::Color color;
 
 		Parameters(
-			sf::Color const& plotColor,
-			sf::Color const& backgroundColor = DEFAULT.backgroundColor);
+			x::string const& funcName,
+			sf::Color const& color);
 	};
 
 	Parameters parameters;
@@ -49,6 +49,7 @@ public:
 	void display() const;
 	void fitTarget();
 	void refresh();
+	Expr* getFunc() const;
 	//void setViewRange(Point const& viewMin, Point const& viewMax);
 
 	~Plot();

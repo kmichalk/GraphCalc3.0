@@ -9,27 +9,18 @@
 #include "PostfixOperator.h"
 #include "PrefixOperator.h"
 #include "InterfixOperator.h"
+#include "WindowEventHandler.h"
+#include "DrawTaskHandler.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void Application::initDragHandler_()
 {
-	auto dragHandler = new DragHandler{*this};
+	//auto dragHandler = new DragHandler{*this};
 
-	eventHandler_.add(new KeyPressEvent{
-		WKey::LMB,
-		true,
-		x::FnCall<DragHandler, void(View*)>{ dragHandler, &DragHandler::hook, &view_ }
-	});
-
-	eventHandler_.add(new KeyReleaseEvent{
-		WKey::LMB,
-		true,
-		x::Fn<DragHandler, void()>{ dragHandler, &DragHandler::unhook }
-	});
-
-	services_.push_back(dragHandler);
+	drawingHandler_.addService(new DragHandler{view_,});
+	//services_.push_back(dragHandler);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -97,16 +88,18 @@ void Application::createTestPlots_()
 	x::string input;
 	std::cout << "f(x) = ";
 	std::cin >> input;
-	std::cout << input << std::endl;
-	try {
-		plotHandler_.createPlot(commandAnalizer_.process(input));
-	}
-	catch (x::error<PlotHandler> e) {
-		std::cout << e.message << std::endl;
-	}
-	catch (x::error<CommandAnalizer> e) {
-		std::cout << e.message<<std::endl;
-	}
+	//std::cout << input << std::endl;
+	commandAnalizer_.analize(input);
+	plotHandler_.createPlot(commandAnalizer_.plotBuffer);
+	//try {
+	//	plotHandler_.createPlot(commandAnalizer_.process(input));
+	//}
+	//catch (x::error<PlotHandler> e) {
+	//	logStream << e;
+	//}
+	//catch (x::error<CommandAnalizer> e) {
+	//	logStream << e;
+	//}
 	//plotHandler_.createPlot(new Func<1>{::sin}, {sf::Color{100,200,100}});
 	/*plotHandler_.createPlot(Func<2>{Functions::add,
 			new Func<1>{::sin, new Func<2>{Functions::mult, new x::math::cval<basic_t>{2.3}, new Func<1>{Functions::x}}},
@@ -128,6 +121,7 @@ void Application::createTestPlots_()
 ///////////////////////////////////////////////////////////////////////////////
 
 Application::Application(
+	std::ostream& logStream,
 	View::Parameters const& viewParamters)
 	:
 	//window_			{params, title},
@@ -135,7 +129,9 @@ Application::Application(
 	initViewParams_	{viewParamters},
 	plotHandler_	{view_},
 	eventHandler_	{DEFAULT_EVENT_PROCESS_PERIOD},
-	drawingHandler_	{*this, view_}
+	drawingHandler_	{view_},
+	commandAnalizer_{*this},
+	logStream		{logStream}
 	//backgroundColor_{DEFAULT_BACKGROUND_COLOR}
 {
 }
@@ -145,11 +141,7 @@ Application::Application(
 void Application::process()
 {
 	while (running_) {
-		processServices_();
-		//plotHandler_.display();
-		//window_.display();
-		//window_.clear(backgroundColor_);
-		//processWindowEvents_();
+		Sleep(100);
 	}
 	//std::cout << "exit: running " << running_ << ", window_open " << window_.isOpen() << std::endl;
 }
@@ -159,13 +151,22 @@ void Application::process()
 void Application::prepare()
 {
 	parameters.font.loadFromFile("C:/Users/user/consola.ttf");
-	add(&eventHandler_);
-	add(&drawingHandler_);
-	drawingHandler_.addDrawTask(new Grid{view_});
-	drawingHandler_.addDrawTask(&plotHandler_);
+
+	drawingHandler_.addService(new WindowEventHandler{view_});
+
+	auto drawTaskHandler = new DrawTaskHandler{view_};
+	drawTaskHandler->addTask(new Grid{view_});
+	drawTaskHandler->addTask(&plotHandler_);
+	drawingHandler_.addService(drawTaskHandler);
+	
+	/*drawingHandler_.addDrawTask();
+	drawingHandler_.addDrawTask(&plotHandler_);*/
 	initKeyEvents_();
 	initDragHandler_();
 	initCommandAnalizer_();
+
+	add(&eventHandler_);
+	add(&drawingHandler_);
 	//view_.center();
 	//view_.setCalcDensity(0.2);
 	
@@ -175,7 +176,12 @@ void Application::prepare()
 
 void Application::initView()
 {
-	view_.init(initViewParams_);
+	view_.initialize(initViewParams_);
+}
+
+void Application::addEvent(Event * event)
+{
+	eventHandler_.add(event);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

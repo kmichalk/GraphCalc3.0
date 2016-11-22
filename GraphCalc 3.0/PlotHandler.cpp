@@ -1,4 +1,5 @@
 #include "PlotHandler.h"
+#include "loops.h"
 
 
 PlotHandler::PlotHandler(
@@ -19,15 +20,27 @@ void PlotHandler::createPlot(
 	plots_.push_back(new Plot{func, targetView_.calcFuncRange(), targetView_, parameters});
 }
 
+void PlotHandler::createPlot(x::vector<CommandAnalizer::ParseResult> const & plots)
+{
+	const_foreach(plot, plots){
+		createPlot(plot->func, {plot->funcName, Plot::Parameters::DEFAULT.color});
+	}
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void PlotHandler::draw(View & targetView)
 {
-	bool viewChanged = targetView_.changed();
+	bool viewChanged = targetView_.changed;
 	for (auto plot{plots_.begin()}; plot; ++plot) {
 		if (viewChanged) plot->refresh();
 		plot->display();
 	}
+}
+
+x::result<Plot*> PlotHandler::findFunc(x::string const name)
+{
+	return plots_.find_by([&name](Plot* p) {return p->parameters.funcName == name; });
 }
 
 void PlotHandler::display()
@@ -35,7 +48,7 @@ void PlotHandler::display()
 	/*if (targetView_.changed()) {
 		refresh();
 	}*/
-	bool viewChanged = targetView_.changed();
+	bool viewChanged = targetView_.changed;
 	for (auto plot{plots_.begin()}; plot; ++plot) {
 		if (viewChanged) plot->refresh();
 		plot->display();

@@ -57,7 +57,7 @@ void DrawingHandler::addDrawTask(DrawTask * task)
 
 void DrawingHandler::process()
 {
-	parent_.initView();
+	parentApplication.initView();
 	view_.center();
 	view_.setOffset({400,-300});
 	TimedProcess::process();

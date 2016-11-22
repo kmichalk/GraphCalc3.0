@@ -1,7 +1,7 @@
 #include "AppComponent.h"
 
-AppComponent::AppComponent(Application & parent)
+AppComponent::AppComponent(Application & parentApplication)
 	:
-	parent_{parent}
+	parentApplication{parentApplication}
 {
 }

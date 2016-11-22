@@ -7,7 +7,7 @@
 
 OperatorParser::OperatorParser(CommandAnalizer const & parentAnalizer)
 	:
-	ExprParser(parentAnalizer)
+	Parser(parentAnalizer)
 {
 }
 
@@ -15,7 +15,7 @@ OperatorParser::OperatorParser(
 	CommandAnalizer const & parentAnalizer,
 	std::initializer_list<Operator*> operators)
 	:
-	ExprParser(parentAnalizer),
+	Parser(parentAnalizer),
 	operatorPriority_{operators}
 {
 }

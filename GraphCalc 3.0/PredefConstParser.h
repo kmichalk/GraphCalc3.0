@@ -1,11 +1,11 @@
 #ifndef _PREDEF_CONST_PARSER_H_
 #define _PREDEF_CONST_PARSER_H_
 
-#include "ExprParser.h"
+#include "Parser.h"
 
 
 class PredefConstParser:
-	public ExprParser
+	public Parser
 {
 public:
 	PredefConstParser(CommandAnalizer const& parentAnalizer);

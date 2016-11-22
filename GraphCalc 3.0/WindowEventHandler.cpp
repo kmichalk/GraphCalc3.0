@@ -4,14 +4,15 @@
 
 void WindowEventHandler::readjustView_() const
 {
-	parentView.window->setView(sf::View{
-		(sf::Vector2f)parentView.window->getSize() / 2.0f ,
-		(sf::Vector2f)parentView.window->getSize()});
+	targetView.window->setView(sf::View{
+		(sf::Vector2f)targetView.window->getSize() / 2.0f ,
+		(sf::Vector2f)targetView.window->getSize()});
 }
 
-WindowEventHandler::WindowEventHandler(View & parentView)
+WindowEventHandler::WindowEventHandler(View & targetView)
 	:
-	parentView{parentView}
+	Service(targetView.parentApplication),
+	targetView{targetView}
 {
 }
 
@@ -19,12 +20,12 @@ void WindowEventHandler::process()
 {
 	sf::Event windowEvent;
 
-	if (parentView.window->pollEvent(windowEvent)) {
+	if (targetView.window->pollEvent(windowEvent)) {
 		if (windowEvent.type == sf::Event::EventType::Closed) {
-			parentView.window->close();
+			targetView.window->close();
 		}
 		if (windowEvent.type == sf::Event::EventType::Resized) {
-			readjustView_();
+			targetView.readjust();
 		}
 	}
 }

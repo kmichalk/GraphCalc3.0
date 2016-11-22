@@ -3,7 +3,7 @@
 PredefConstParser::PredefConstParser(
 	CommandAnalizer const & parentAnalizer)
 	:
-	ExprParser(parentAnalizer)
+	Parser(parentAnalizer)
 {
 }
 

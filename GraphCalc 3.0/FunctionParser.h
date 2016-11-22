@@ -1,11 +1,11 @@
 #ifndef _DELIMITED_EXPR_H_
 #define _DELIMITED_EXPR_H_
 
-#include "ExprParser.h"
+#include "Parser.h"
 
 
 class FunctionParser:
-	public ExprParser
+	public Parser
 {
 	x::string::const_iterator findLeftBracket_(x::string::const_iterator begin) const;
 	x::string::const_iterator findRightBracket_(x::string::const_iterator begin) const;
