@@ -12,6 +12,8 @@ class AnalizerComponent;
 class CommandAnalizer:
 	public AppComponent
 {
+	friend class NotificationReceiver;
+
 	static const unsigned DEFAULT_MAX_DEPTH_;
 	static const x::error<CommandAnalizer> ERROR_PARSER_NULLPTR_;
 	static const x::error<CommandAnalizer> ERROR_MAX_DEPTH_;
@@ -33,8 +35,21 @@ public:
 		Expr* func;
 		x::string funcName;
 		char argName;
+		x::vector<Pack*> packs;
 
 		ParseResult();
+	};
+
+	struct NotificationReceiver
+	{
+		CommandAnalizer& parentAnalizer;
+
+		NotificationReceiver(CommandAnalizer& parentAnalizer);
+
+		void foundFuncName(x::string const& funcName) const;
+		void foundArgName(char argName) const;
+		void foundPack(Pack* pack) const;
+		void stop() const;
 	};
 
 	enum ErrorNum
@@ -43,10 +58,10 @@ public:
 	};
 
 	x::vector<ParseResult> plotBuffer;
+	NotificationReceiver notify;
 
 	CommandAnalizer(Application& parentApplication);
 
-	void process(x::string line);
 	Expr* parse(x::string & line) const;
 	void analize(x::string line);
 	void addParser(Parser* parser);

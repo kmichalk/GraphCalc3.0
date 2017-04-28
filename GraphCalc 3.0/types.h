@@ -4,7 +4,10 @@
 #include "crd.h"
 #include "crd_cast.h"
 #include "range.h"
-#include "mathfn.h"
+#include "PackExpr.h"
+#include "RefExpr.h"
+#include "error.h"
+
 
 using basic_t = double;
 
@@ -14,19 +17,21 @@ using Vector = crd<basic_t>;
 
 using Size = crd<basic_t>;
 
-using Expr = x::math::expr<basic_t>;
+using Expr = x::expr<basic_t>;
 
-using ArgExpr = x::math::argexpr<basic_t>;
+using Pack = packexpr<basic_t>;
+
+using Ref = refexpr<basic_t>;
 
 template<size_t _nArg> 
-using Func = x::math::func<basic_t, _nArg>;
+using Func = x::func<basic_t, _nArg>;
 
-using Var = x::math::val<basic_t>;
+using Var = x::val<basic_t>;
 
-using Const = x::math::cval<basic_t>;
+using Const = x::cval<basic_t>;
 
 template<size_t _nArg>
-using FuncPtr = x::math::GenFuncPtr<basic_t, basic_t, _nArg>;
+using FuncPtr = x::GenFuncPtr<basic_t, basic_t, _nArg>;
 
 using FuncRange = x::range<basic_t>;
 

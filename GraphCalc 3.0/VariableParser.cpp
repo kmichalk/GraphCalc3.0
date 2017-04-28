@@ -1,26 +1,29 @@
 #include "VariableParser.h"
-#include "CommandAnalizer.h"
+#include "Variables.h"
+#include "RefExpr.h"
 
 
 VariableParser::VariableParser(
-	CommandAnalizer const & parentAnalizer,
-	x::string const& varName)
+	CommandAnalizer const & parentAnalizer)
 	:
-	Parser(parentAnalizer),
-	varName_{varName}
+	Parser(parentAnalizer)
 {
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
 Expr * VariableParser::match(x::string const & text) const
 {
-	std::cout << "match var: " << text << std::endl;
-	return text == varName_ ? new Func<1>{Functions::x} : nullptr;
+	if (auto identifier = text.first()) {
+		if (Variables::validate(*identifier))
+			return new Ref{Variables::get(*identifier)};
+	}
+	return nullptr;
 }
 
 bool VariableParser::basicValidate(x::string const & text) const
 {
-	std::cout << "validate var: " << text << std::endl;
-	return text.size() == varName_.size();
+	return text.size() == 1;
+}
+
+VariableParser::~VariableParser()
+{
 }

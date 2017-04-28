@@ -19,6 +19,7 @@ public:
 	virtual bool basicValidate(x::string const& text) const abstract;
 	//virtual Expr* parse(x::string const& text) const abstract;
 	//Expr* parse(x::string const& line);
+	virtual ~Parser();
 };
 
 #endif //_EXPR_PARSER_H_

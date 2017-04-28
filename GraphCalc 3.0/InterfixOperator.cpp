@@ -30,11 +30,13 @@ InterfixOperator::InterfixOperator(
 Expr * InterfixOperator::match(x::string const & text) const
 {
 	if (auto opPos = findOperator_(text)) {
-		if (auto funcPtr = Functions::twoArgFuncs[x::string{identifier_}.data()]) {
-			return new Func<2>{
-				*funcPtr,
+		if (Expr* func = Functions::matchFunc(identifier_, 2)) {
+			if (!func->set_args({
 				parentParser.parentAnalizer.parse(text.substr(0, *opPos - 1)),
-				parentParser.parentAnalizer.parse(text.substr(*opPos + 1))};
+				parentParser.parentAnalizer.parse(text.substr(*opPos + 1))}))
+				throw x::error<InterfixOperator>{
+					x::string{"Illegal number of operands for operator "} +x::string{identifier_}};
+			return func;
 		}
 	}
 	return nullptr;

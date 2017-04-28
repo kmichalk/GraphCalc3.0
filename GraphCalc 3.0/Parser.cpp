@@ -156,3 +156,7 @@ Parser::Parser(CommandAnalizer const & parentAnalizer)
 	parentAnalizer{parentAnalizer}
 {
 }
+
+Parser::~Parser()
+{
+}

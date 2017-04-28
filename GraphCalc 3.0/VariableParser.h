@@ -1,5 +1,5 @@
-#ifndef _XEXPR_H_
-#define _XEXPR_H_
+#ifndef _VARIABLE_PARSER_H_
+#define _VARIABLE_PARSER_H_
 
 #include "Parser.h"
 
@@ -7,17 +7,13 @@
 class VariableParser:
 	public Parser
 {
-	static constexpr char const DEFAULT_VAR_NAME[] = "x";
-
-	x::string varName_;
-
 public:
-	VariableParser(
-		CommandAnalizer const& parentAnalizer, 
-		x::string const& varName = DEFAULT_VAR_NAME);
+	VariableParser(CommandAnalizer const& parentAnalizer);
 
 	virtual Expr* match(x::string const& text) const override;
 	virtual bool basicValidate(x::string const& text) const override;
+
+	virtual ~VariableParser() override;
 };
 
-#endif //_XEXPR_H_
+#endif //_VARIABLE_PARSER_H_

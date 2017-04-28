@@ -125,11 +125,6 @@ public:
 	static constexpr FuncPtr<2> eq = eq_;
 	static constexpr FuncPtr<2> ne = ne_;
 
-
-	static x::strmap<FuncPtr<1>> oneArgFuncs;
-	static x::strmap<FuncPtr<2>> twoArgFuncs;
-	static x::strmap<FuncPtr<3>> threeArgFuncs;
-
 	static ExprMap* funcMap[4];
 	/*template<size_t _nArg>
 	static inline enable_if<_nArg == 1,
@@ -152,7 +147,8 @@ public:
 		return threeArgFuncs[str];
 	}*/
 
-	static ArgExpr* matchFunc(x::string const& str, unsigned argnum);
+	static Expr* matchFunc(x::string const& str, unsigned argnum);
+
 };
 
 #endif //_FUNCTIONS_H_

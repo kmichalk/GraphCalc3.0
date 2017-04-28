@@ -19,7 +19,7 @@ void CommandValidator::addRule(ValidationRule * rule)
 
 void CommandValidator::clear()
 {
-	validationRules_.erase<x::PTR_DELETE>();
+	validationRules_.clear<x::PTR_DELETE>();
 }
 
 CommandValidator::~CommandValidator()

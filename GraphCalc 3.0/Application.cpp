@@ -4,13 +4,17 @@
 #include "XAxis.h"
 #include "OperatorParser.h"
 #include "FunctionParser.h"
-#include "VariableParser.h"
+#include "ArgumentParser.h"
 #include "ConstParser.h"
 #include "PostfixOperator.h"
 #include "PrefixOperator.h"
 #include "InterfixOperator.h"
+#include "PackParser.h"
+#include "VariableParser.h"
 #include "WindowEventHandler.h"
 #include "DrawTaskHandler.h"
+#include "CrossCursor.h"
+#include "Variables.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -69,8 +73,12 @@ void Application::initCommandAnalizer_()
 	opParser->addOperator(new InterfixOperator{*opParser, '^'});
 	commandAnalizer_.addParser(opParser);
 	commandAnalizer_.addParser(new FunctionParser{commandAnalizer_});
-	commandAnalizer_.addParser(new VariableParser{commandAnalizer_,"x"});
+	commandAnalizer_.addParser(new ArgumentParser{commandAnalizer_,"x"});
 	commandAnalizer_.addParser(new ConstParser{commandAnalizer_});
+	commandAnalizer_.addParser(new VariableParser{commandAnalizer_});
+	commandAnalizer_.addParser(new PackParser{commandAnalizer_, '{','}',','});
+
+	Variables::set('A', new Const{1});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -157,6 +165,7 @@ void Application::prepare()
 	auto drawTaskHandler = new DrawTaskHandler{view_};
 	drawTaskHandler->addTask(new Grid{view_});
 	drawTaskHandler->addTask(&plotHandler_);
+	drawTaskHandler->addTask(new CrossCursor{view_});
 	drawingHandler_.addService(drawTaskHandler);
 	
 	/*drawingHandler_.addDrawTask();

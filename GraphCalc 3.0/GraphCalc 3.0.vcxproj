@@ -157,9 +157,12 @@
     <ClInclude Include="AppComponent.h" />
     <ClInclude Include="AppConstants.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="AssignAnalizer.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="CommandValidator.h" />
     <ClInclude Include="ConstParser.h" />
+    <ClInclude Include="CrossCursor.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="DrawHandler.h" />
     <ClInclude Include="DrawTaskHandler.h" />
     <ClInclude Include="ExprMap.h" />
@@ -175,6 +178,8 @@
     <ClInclude Include="FunctionParser.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="DragHandler.h" />
+    <ClInclude Include="PackExpr.h" />
+    <ClInclude Include="PackParser.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="FuncMap.h" />
     <ClInclude Include="Functions.h" />
@@ -187,21 +192,28 @@
     <ClInclude Include="ServiceHandler.h" />
     <ClInclude Include="Plot.h" />
     <ClInclude Include="PlotHandler.h" />
+    <ClInclude Include="SimpleCursor.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="ValidationRule.h" />
+    <ClInclude Include="RefExpr.h" />
+    <ClInclude Include="VariableParser.h" />
+    <ClInclude Include="Variables.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="WindowEventHandler.h" />
     <ClInclude Include="XAxis.h" />
-    <ClInclude Include="VariableParser.h" />
+    <ClInclude Include="ArgumentParser.h" />
     <ClInclude Include="YAxis.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnalizerComponent.cpp" />
     <ClCompile Include="AppComponent.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AssignAnalizer.cpp" />
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="CommandValidator.cpp" />
     <ClCompile Include="ConstParser.cpp" />
+    <ClCompile Include="CrossCursor.cpp" />
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DrawHandler.cpp" />
     <ClCompile Include="DrawTask.cpp" />
     <ClCompile Include="DrawTaskHandler.cpp" />
@@ -215,6 +227,7 @@
     <ClCompile Include="CommandAnalizer.cpp" />
     <ClCompile Include="FunctionParser.cpp" />
     <ClCompile Include="DragHandler.cpp" />
+    <ClCompile Include="PackParser.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -225,11 +238,14 @@
     <ClCompile Include="PrefixOperator.cpp" />
     <ClCompile Include="Service.cpp" />
     <ClCompile Include="ServiceHandler.cpp" />
+    <ClCompile Include="SimpleCursor.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="VariableParser.cpp" />
+    <ClCompile Include="Variables.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="XAxis.cpp" />
-    <ClCompile Include="VariableParser.cpp" />
+    <ClCompile Include="ArgumentParser.cpp" />
     <ClCompile Include="YAxis.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

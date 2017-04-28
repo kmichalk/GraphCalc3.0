@@ -16,6 +16,6 @@ void CommandSeparatorComponent::process(x::string & line) const
 {
 	auto commands = line.separate(separator_);
 	foreach(command, commands){
-		parentAnalizer.process(*command);
+		parentAnalizer.analize(*command);
 	}
 }

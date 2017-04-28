@@ -52,9 +52,6 @@
     <Filter Include="Parser\OperatorParser\Operator">
       <UniqueIdentifier>{1fbd4ade-74fe-4638-95a6-e6fe312ec1b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Parser\VariableParser">
-      <UniqueIdentifier>{0d5ed3e7-a810-405f-ad46-c6bb26120992}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Parser\ConstParser">
       <UniqueIdentifier>{006df2d2-f1d7-47c2-897a-de78f43166f0}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,30 @@
     </Filter>
     <Filter Include="Application\Service\WindowEventHandler">
       <UniqueIdentifier>{d52f5bd6-a324-4dd4-bed2-ad8dcb681ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Variables">
+      <UniqueIdentifier>{a7e4d7ac-142f-4b6d-922c-c6710af03862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\ArgumentParser">
+      <UniqueIdentifier>{0d5ed3e7-a810-405f-ad46-c6bb26120992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\PackParser">
+      <UniqueIdentifier>{9ccdf522-6b7e-4168-b2a1-bf398af62919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\VariableParser">
+      <UniqueIdentifier>{97865d16-16ed-49eb-baa4-9c9943e262fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\AssignAnalizer">
+      <UniqueIdentifier>{c5604722-3c11-47fd-872a-06903f222636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\Component\FunctionRecognizer">
+      <UniqueIdentifier>{772d50e8-3a9d-4966-a065-cfc449c28324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser\Component\CommandSeparatorComponent">
+      <UniqueIdentifier>{bd6d7794-875b-44a3-b96f-48d77c6578e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Draw\Cursor">
+      <UniqueIdentifier>{7a263d65-764c-4cdd-bafa-25724adc64f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +159,6 @@
     <ClInclude Include="AnalizerComponent.h">
       <Filter>Parser\Component</Filter>
     </ClInclude>
-    <ClInclude Include="CommandSeparatorComponent.h">
-      <Filter>Parser\Component</Filter>
-    </ClInclude>
     <ClInclude Include="ValidationRule.h">
       <Filter>Parser\Component\Validator</Filter>
     </ClInclude>
@@ -165,9 +183,6 @@
     <ClInclude Include="OperatorParser.h">
       <Filter>Parser\OperatorParser</Filter>
     </ClInclude>
-    <ClInclude Include="VariableParser.h">
-      <Filter>Parser\VariableParser</Filter>
-    </ClInclude>
     <ClInclude Include="ConstParser.h">
       <Filter>Parser\ConstParser</Filter>
     </ClInclude>
@@ -186,8 +201,41 @@
     <ClInclude Include="CommandValidator.h">
       <Filter>Parser\Component\Validator</Filter>
     </ClInclude>
+    <ClInclude Include="PackExpr.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Variables.h">
+      <Filter>Application\Variables</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgumentParser.h">
+      <Filter>Parser\ArgumentParser</Filter>
+    </ClInclude>
+    <ClInclude Include="PackParser.h">
+      <Filter>Parser\PackParser</Filter>
+    </ClInclude>
+    <ClInclude Include="RefExpr.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableParser.h">
+      <Filter>Parser\VariableParser</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignAnalizer.h">
+      <Filter>Parser\AssignAnalizer</Filter>
+    </ClInclude>
     <ClInclude Include="FunctionRecognizer.h">
-      <Filter>Parser\Component</Filter>
+      <Filter>Parser\Component\FunctionRecognizer</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandSeparatorComponent.h">
+      <Filter>Parser\Component\CommandSeparatorComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Draw\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossCursor.h">
+      <Filter>Draw\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleCursor.h">
+      <Filter>Draw\Cursor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +293,6 @@
     <ClCompile Include="AnalizerComponent.cpp">
       <Filter>Parser\Component</Filter>
     </ClCompile>
-    <ClCompile Include="CommandSeparatorComponent.cpp">
-      <Filter>Parser\Component</Filter>
-    </ClCompile>
     <ClCompile Include="IllegalCharRule.cpp">
       <Filter>Parser\Component\Validator</Filter>
     </ClCompile>
@@ -269,9 +314,6 @@
     <ClCompile Include="OperatorParser.cpp">
       <Filter>Parser\OperatorParser</Filter>
     </ClCompile>
-    <ClCompile Include="VariableParser.cpp">
-      <Filter>Parser\VariableParser</Filter>
-    </ClCompile>
     <ClCompile Include="ConstParser.cpp">
       <Filter>Parser\ConstParser</Filter>
     </ClCompile>
@@ -290,11 +332,38 @@
     <ClCompile Include="CommandValidator.cpp">
       <Filter>Parser\Component\Validator</Filter>
     </ClCompile>
-    <ClCompile Include="FunctionRecognizer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Variables.cpp">
+      <Filter>Application\Variables</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgumentParser.cpp">
+      <Filter>Parser\ArgumentParser</Filter>
+    </ClCompile>
+    <ClCompile Include="PackParser.cpp">
+      <Filter>Parser\PackParser</Filter>
     </ClCompile>
     <ClCompile Include="DrawTask.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableParser.cpp">
+      <Filter>Parser\VariableParser</Filter>
+    </ClCompile>
+    <ClCompile Include="AssignAnalizer.cpp">
+      <Filter>Parser\AssignAnalizer</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionRecognizer.cpp">
+      <Filter>Parser\Component\FunctionRecognizer</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandSeparatorComponent.cpp">
+      <Filter>Parser\Component\CommandSeparatorComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Draw\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleCursor.cpp">
+      <Filter>Draw\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossCursor.cpp">
+      <Filter>Draw\Cursor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

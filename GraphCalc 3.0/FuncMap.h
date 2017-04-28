@@ -13,14 +13,14 @@ class FuncMap:
 public:
 	using x::strmap<FuncPtr<_nArg>>::strmap;
 
-	virtual ArgExpr* matchFunc(x::string const& funcName) const override;
+	virtual Expr* matchFunc(x::string const& funcName) const override;
 	//virtual Expr* setArgs(Expr* base, x::vector<Expr*> const& args) const override;
 };
 
 
 
 template<unsigned _nArg>
-ArgExpr * FuncMap<_nArg>::matchFunc(x::string const & funcName) const
+Expr * FuncMap<_nArg>::matchFunc(x::string const & funcName) const
 {
 	if (auto funcPtr = (*x::rem_const(this))[funcName.data()])
 		return new Func<_nArg>{*funcPtr};

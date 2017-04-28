@@ -35,14 +35,14 @@ x::string::const_iterator FunctionParser::findRightBracket_(x::string::const_ite
 Expr * FunctionParser::makeFunc_(x::string const& funcName, x::vector<x::string>& args) const
 {
 	std::cout << args.size()<<" "<< args;
-	if (ArgExpr* func = Functions::matchFunc(funcName, args.size())) {
+	if (Expr* func = Functions::matchFunc(funcName, args.size())) {
 		x::vector<Expr*> argsExprBuffer{args.size()};
 		foreach(arg, args)
 		{
 			std::cout << "arg: " << *arg << std::endl;
 			argsExprBuffer.push_back(parentAnalizer.parse(*arg));
 		}
-		if (func->setArgs(argsExprBuffer.data(), argsExprBuffer.size()))
+		if (func->set_args(argsExprBuffer))
 			return func;
 	}
 	return nullptr;

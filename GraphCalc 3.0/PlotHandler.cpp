@@ -14,7 +14,7 @@ PlotHandler::PlotHandler(
 
 void PlotHandler::createPlot(
 	Expr* func, 
-	Plot::Parameters const & parameters)
+	Plot::Parameters const & parameters) throw(x::error<PlotHandler>)
 {
 	if (!func) throw x::error<PlotHandler>{0, "Function expression was nullptr.\n"}; 
 	plots_.push_back(new Plot{func, targetView_.calcFuncRange(), targetView_, parameters});
@@ -67,5 +67,5 @@ void PlotHandler::refresh()
 
 void PlotHandler::clear()
 {
-	plots_.erase<x::PTR_DELETE>();
+	plots_.clear<x::PTR_DELETE>();
 }

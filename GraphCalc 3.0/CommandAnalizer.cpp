@@ -12,8 +12,6 @@ void CommandAnalizer::removeMarginBrackets_(x::string & line) const
 	auto brPos = line.match_bracket(0);
 	if (brPos && *brPos == line.lastpos())
 		line.cut(1, line.lastpos() - 1);
-	/*if (line.first() == '(' && line.last() == ')')
-		line.cut(1, line.lastpos() - 1);*/
 }
 
 bool CommandAnalizer::assertDepth_() const
@@ -32,11 +30,15 @@ void CommandAnalizer::analize(x::string line)
 	try {
 		plotBuffer.clear();
 		validator_.process(line);
-		process(line);
+		plotBuffer.push_back({});
+		plotBuffer.last()->func = parse(line);;
 	}
 	catch (x::error<CommandValidator> e) {
-		parentApplication.logStream << e << std::endl;
+		parentApplication.logStream << e;
 	}	
+	catch (x::error<CommandAnalizer> e) {
+		parentApplication.logStream << e;
+	}
 	/*foreach(component, components_){ 
 		component->process(line);
 	}*/
@@ -63,7 +65,7 @@ void CommandAnalizer::addParser(Parser * parser, size_t priority)
 
 CommandAnalizer::~CommandAnalizer()
 {
-	parsers_.erase<x::PTR_DELETE>();
+	parsers_.clear<x::PTR_DELETE>();
 	//delete var_;
 }
 
@@ -75,26 +77,17 @@ CommandAnalizer::CommandAnalizer(Application & parentApplication)
 	parsers_		{},
 	depth_			{0},
 	maxDepth_		{DEFAULT_MAX_DEPTH_},
-	validator_		{*this}
+	validator_		{*this},
+	notify			{*this}
 	//var_{new basic_t{0}}
 {
 	validator_.addRule(new IllegalCharRule{
 		'`', '~', '@', '#', '$', 
-		'_', '{', '}', '[', ']', 
+		'_', '[', ']', 
 		'\"', '\'', '\\', '?', '\n', 
 		'\t', '\b', '\r', '\f', '\a', '\0'});
 }
 
-void CommandAnalizer::process(x::string line)
-{	
-	try {
-		plotBuffer.push_back({});
-		plotBuffer.last()->func = parse(line);;
-	}
-	catch (x::error<CommandAnalizer> e) {
-		parentApplication.logStream << e;
-	}
-}
 
 Expr * CommandAnalizer::parse(x::string & line) const
 {
@@ -143,6 +136,33 @@ CommandAnalizer::ParseResult::ParseResult()
 	:
 	func{nullptr},
 	funcName{},
-	argName{CommandAnalizer::DEFAULT_ARG_NAME_}
+	argName{CommandAnalizer::DEFAULT_ARG_NAME_},
+	packs(1)
+{
+}
+
+CommandAnalizer::NotificationReceiver::NotificationReceiver(
+	CommandAnalizer & parentAnalizer)
+	:
+	parentAnalizer{parentAnalizer}
+{
+}
+
+void CommandAnalizer::NotificationReceiver::foundFuncName(x::string const & funcName) const
+{
+	parentAnalizer.plotBuffer.last()->funcName = funcName;
+}
+
+void CommandAnalizer::NotificationReceiver::foundArgName(char argName) const
+{
+	parentAnalizer.plotBuffer.last()->argName = argName;
+}
+
+void CommandAnalizer::NotificationReceiver::foundPack(Pack * pack) const
+{
+	parentAnalizer.plotBuffer.last()->packs.push_back(pack);
+}
+
+void CommandAnalizer::NotificationReceiver::stop() const
 {
 }

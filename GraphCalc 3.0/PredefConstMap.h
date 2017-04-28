@@ -8,7 +8,7 @@ class PredefConstMap :
 	public ExprMap
 {
 public:
-	virtual ArgExpr* matchFunc(x::string const& funcName) const override;
+	virtual Expr* matchFunc(x::string const& funcName) const override;
 };
 
 #endif //_PREDEF_CONST_MAP_H_

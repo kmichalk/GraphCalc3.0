@@ -16,11 +16,14 @@ PrefixOperator::PrefixOperator(
 
 Expr * PrefixOperator::match(x::string const & text) const
 {
-	if (*text.first() == identifier_)
-		if (auto funcPtr = Functions::oneArgFuncs[x::string{identifier_}.data()])
-			return new Func<1>{
-				*funcPtr,	
-				parentParser.parentAnalizer.parse(text.substr(1))};
+	if (*text.first() == identifier_) {
+		if (Expr* func = Functions::matchFunc(identifier_, 1)) {
+			if (!func->set_args({parentParser.parentAnalizer.parse(text.substr(1))}))
+				throw x::error<PrefixOperator>{
+					x::string{"Illegal number of operands for operator "} + x::string{identifier_}};
+			return func;
+		}
+	}
 	return nullptr;
 }
 

@@ -29,7 +29,7 @@ void DrawTaskHandler::addTask(DrawTask * task)
 
 void DrawTaskHandler::clear()
 {
-	tasks_.erase<x::PTR_DELETE>();
+	tasks_.clear<x::PTR_DELETE>();
 }
 
 DrawTaskHandler::~DrawTaskHandler()

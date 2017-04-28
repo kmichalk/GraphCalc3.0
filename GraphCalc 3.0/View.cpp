@@ -63,6 +63,7 @@ void View::initialize(Parameters const & parameters)
 	crdBegin_ = {0.0f, (float)window->getSize().y};
 	backgroundColor_ = parameters.backgroundColor;
 	center();
+	window->setMouseCursorVisible(false);
 	/*setOffset({(float)parameters.videoMode.width / 2 * x::sgn(parameters.scale.x),
 		(float)parameters.videoMode.height / 2 * x::sgn(parameters.scale.y)});*/
 }

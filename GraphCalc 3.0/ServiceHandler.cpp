@@ -32,7 +32,7 @@ void ServiceHandler::addService(Service * service)
 
 void ServiceHandler::clear()
 {
-	services_.erase<x::PTR_DELETE>();
+	services_.clear<x::PTR_DELETE>();
 }
 
 ServiceHandler::~ServiceHandler()
